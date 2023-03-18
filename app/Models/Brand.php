@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-class Category extends Model
+
+class Brand extends Model
 {
     public static $success = 1;
     public static $error = 0;
@@ -13,7 +14,7 @@ class Category extends Model
     public static $update_success_message = "Data Updated Successfully";
     public static $delete_success_message = "Data Deleted Successfully";
     use HasFactory;
-    protected $fillable = ['name', 'created_by', 'approved_by', 'approved_at', 'updated_by'];
+    protected $fillable = ['category_id', 'name', 'created_by', 'approved_by', 'approved_at', 'updated_by'];
 
     public static function prepareData($request, $storeORUpdate="store" )
     {
@@ -39,7 +40,7 @@ class Category extends Model
         return $data;
     }
 
-    public static function categories()
+    public static function brands()
     {
         $data = self::query()->get()->where('status', 1);
         return $data;
@@ -69,5 +70,10 @@ class Category extends Model
     public static function deleteCategory($id)
     {
         return self::query()->where('id', $id)->delete();
+    }
+    public function getNewTabless()
+    {
+        $tableName = $this->getTable();
+        dd($tableName);
     }
 }

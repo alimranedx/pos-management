@@ -33,7 +33,10 @@
                             <a class="nav-link" href="#">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Brand') }}</a>
+                            <a class="nav-link" href="{{ route('category') }}">{{ __('Category') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('brand') }}">{{ __('Brand') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{ __('Product') }}</a>
