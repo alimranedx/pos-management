@@ -18,8 +18,7 @@
                         <input type="hidden" name='id' value="{{ ($brand->id) ?? ''}}">
                         <div class="mb-3">
                           <label for="category" class="form-label">{{ __('Category') }}</label>
-                          <select class="form-select" id="category" data-placeholder="Choose Category">
-                            <option>--Select one first--</option>
+                          <select class="form-select" id="category" name="category_id[]" data-placeholder="Select Category" multiple>
                             @foreach ($categories as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
@@ -35,4 +34,14 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $( '#category' ).select2( {
+            theme: "bootstrap-5",
+            width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+            placeholder: $( this ).data( 'placeholder' ),
+            closeOnSelect: false,
+        } );
+    </script>
 @endsection
