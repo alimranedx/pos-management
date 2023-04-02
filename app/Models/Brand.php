@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-
 class Brand extends Model
 {
     public static $success = 1;
@@ -13,20 +12,30 @@ class Brand extends Model
     public static $success_message = "Data Insert Successfully";
     public static $update_success_message = "Data Updated Successfully";
     public static $delete_success_message = "Data Deleted Successfully";
+    public static $duplicate_entry_message = "Data Already Exist !!";
     use HasFactory;
-    protected $fillable = ['category_id', 'name', 'created_by', 'approved_by', 'approved_at', 'updated_by'];
+    protected $fillable = ['name','category_id', 'created_by', 'approved_by', 'approved_at', 'updated_by'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     public static function prepareData($request, $storeORUpdate="store" )
     {
-        foreach($request->request as $key => $dd){
+        foreach($request->request as $key => $request_data){
             if($key != '_token' && $key != 'id'){
-                $data[$key] = $dd;
+                if(is_array($request_data)){
+                    $data[$key] = implode(',',$request_data);
+                }else{
+                    $data[$key] = $request_data;
+                }
             }
         }
         if($storeORUpdate != 'update'){
             $data['created_by'] = Auth::user()->id;
-
-            if(Auth::user()->role == 100)
+            $data['is_active'] = 1;
+            if(Auth::user()->role == 100)    //super admin 100
             {
                 $data['approved_by'] = Auth::user()->id;
                 $data['approved_at'] = date('Y-m-d h:i:s', time());
@@ -42,9 +51,14 @@ class Brand extends Model
 
     public static function brands()
     {
-        $data = self::query()->get()->where('status', 1);
+        $data = self::query()->with('user')->where('status', 1)->get();
         return $data;
     }
+
+    public static function duplicateCheck($column_name, $value)   //pass column name and value and the function return's true of false always
+    {
+        return is_null(self::query()->where($column_name, $value)->first()) ? false : true;
+    } 
 
     public static function store($request)
     {
@@ -57,23 +71,5 @@ class Brand extends Model
         }
     }
 
-    public static function category($id)
-    {
-        return self::query()->findOrFail($id);
-    }
-    public static function updateCategory($request)
-    {
-        $data = self::prepareData($request, 'update');
-        $result = self::query()->where('id', $request->id)->update($data);
-        return $result;
-    }
-    public static function deleteCategory($id)
-    {
-        return self::query()->where('id', $id)->delete();
-    }
-    public function getNewTabless()
-    {
-        $tableName = $this->getTable();
-        dd($tableName);
-    }
+    
 }

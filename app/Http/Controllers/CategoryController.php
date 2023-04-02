@@ -22,6 +22,10 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        if(Category::duplicateCheck('name', $request->name))
+        {
+            return redirect()->back()->with('error', Category::$duplicate_entry_message);
+        }  
         $result = Category::store($request);
         if($result == Category::$success)
         {
