@@ -26,7 +26,7 @@ class BrandController extends Controller
         if(Brand::duplicateCheck('name', $request->name))
         {
             return redirect()->back()->with('error', Brand::$duplicate_entry_message);
-        }  
+        }
         $result = Brand::store($request);
         if($result == Brand::$success)
         {
@@ -50,7 +50,7 @@ class BrandController extends Controller
         if(Brand::updateDuplicateCheck('name', $request->name, $request->id))
         {
             return redirect()->back()->with('error', Brand::$duplicate_entry_message);
-        } 
+        }
 
         $result = Brand::updateBrand($request);
         if($request)

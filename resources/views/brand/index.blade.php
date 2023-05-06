@@ -46,3 +46,8 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+      alert('dkdd');
+    </script>
+@endsection

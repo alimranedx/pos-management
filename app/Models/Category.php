@@ -45,7 +45,7 @@ class Category extends Model
             $data['updated_by'] = Auth::user()->id;
             $data['updated_at'] = date('Y-m-d h:i:s', time());
         }
-        
+
         return $data;
     }
 
@@ -58,7 +58,7 @@ class Category extends Model
     public static function duplicateCheck($column_name, $value)   //pass column name and value and the function return's true of false always
     {
         return is_null(self::query()->where($column_name, $value)->first()) ? false : true;
-    } 
+    }
 
     public static function store($request)
     {

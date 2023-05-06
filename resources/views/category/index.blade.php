@@ -36,7 +36,7 @@
                       <td style="width:15%">{{ $item->created_at }}</td>
                       <td class="text-end" style="width:10%">
                         <a href="{{route('category.edit', $item->id)}}" class="btn btn-sm btn-success">{{ __('edit') }}</a>
-                        <a href="{{ route('category.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
+                        <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('category.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
                       </td>
                     </tr>
                   @endforeach
@@ -45,4 +45,11 @@
               </table>
         </div>
     </div>
+@endsection
+@section('scripts')
+
+    <script>
+      // alert('hello');
+    </script>
+    
 @endsection
