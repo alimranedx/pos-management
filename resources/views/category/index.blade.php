@@ -34,13 +34,13 @@
                       <td>{{ __($item->name) }}</td>
                       <td>{{ __($item->user->name) }}</td>
                       <td style="width:15%">{{ $item->created_at }}</td>
-                      <td class="text-end" style="width:10%">
+                      <td style="width:15%" class="text-end">
                         <a href="{{route('category.edit', $item->id)}}" class="btn btn-sm btn-success">{{ __('edit') }}</a>
                         <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('category.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
                       </td>
                     </tr>
                   @endforeach
-                  
+
                 </tbody>
               </table>
         </div>
@@ -51,5 +51,5 @@
     <script>
       // alert('hello');
     </script>
-    
+
 @endsection
