@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('updated_by')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->tinyInteger('status')->default(1);
-            $table->integer('approved_by');
-            $table->date('approved_at');
             $table->timestamps();
         });
     }
