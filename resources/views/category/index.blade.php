@@ -16,7 +16,9 @@
                   <tr>
                     <th>SL</th>
                     <th>Name</th>
-                    <th>Action</th>
+                    <th>Created By</th>
+                    <th>Created Date</th>
+                    <th class="text-end">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -30,7 +32,9 @@
                     <tr>
                       <td>{{ $sl }}</td>
                       <td>{{ __($item->name) }}</td>
-                      <td>
+                      <td>{{ __($item->user->name) }}</td>
+                      <td style="width:15%">{{ $item->created_at }}</td>
+                      <td class="text-end" style="width:10%">
                         <a href="{{route('category.edit', $item->id)}}" class="btn btn-sm btn-success">{{ __('edit') }}</a>
                         <a href="{{ route('category.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
                       </td>

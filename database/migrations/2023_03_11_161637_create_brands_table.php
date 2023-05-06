@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id');
             $table->string('name');
+            $table->string('image')->nullable();
             $table->integer('created_by');
-            $table->integer('updated_by');
-            $table->tinyInteger('is_active')->default(0);
-            $table->tinyInteger('status')->default(0);
-            $table->integer('approved_by');
-            $table->date('approved_at');
+            $table->integer('updated_by')->nullable();
+            $table->tinyInteger('is_active')->default(1);
+            $table->tinyInteger('status')->default(1);
+            $table->integer('approved_by')->nullable();
+            $table->date('approved_at')->nullable();
             $table->timestamps();
         });
     }
