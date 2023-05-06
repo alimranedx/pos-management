@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Category;
+use App\Models\Brand;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,9 @@ class User extends Authenticatable
     public function category()
     {
         return $this->hasOne(Category::class, 'crated_by');
+    }
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'crated_by');
     }
 }

@@ -38,14 +38,16 @@ Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('ca
 Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
 
-
-Route::get('/brand', [BrandController::class, 'index'])->name('brand');
+// Route::get('/brands', function () {
+//     return "ehllo";
+// });
+Route::get('/brands', [BrandController::class, 'index'])->name('brands');
 Route::get('/brand/add', [BrandController::class, 'add'])->name('brand.add');
 Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
 Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
 Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 Route::post('/brand/update', [BrandController::class, 'update'])->name('brand.update');
 
-//rough===========
+// Route::get('/get-table', [BrandController::class, 'getTable']);
 
-Route::get('send-email', [SendEmailController::class, 'index']);
+// Route::get('send-email', [SendEmailController::class, 'index']);

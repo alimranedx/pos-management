@@ -16,6 +16,8 @@
                   <tr>
                     <th>SL</th>
                     <th>Name</th>
+                    <th>Created By</th>
+                    <th>Created Time</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -30,9 +32,11 @@
                     <tr>
                       <td>{{ $sl }}</td>
                       <td>{{ __($item->name) }}</td>
-                      <td>
-                        <a href="{{route('category.edit', $item->id)}}" class="btn btn-sm btn-success">{{ __('edit') }}</a>
-                        <a href="{{ route('category.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
+                      <td>{{ __($item->user->name) }}</td>
+                      <td style="width:15%">{{ $item->created_at }}</td>
+                      <td style="width:10%">
+                        <a href="{{route('brand.edit', $item->id)}}" class="btn btn-sm btn-success">{{ __('edit') }}</a>
+                        <a href="{{ route('brand.delete', $item->id) }}" class="btn btn-sm btn-danger">{{ __('delete') }}</a>
                       </td>
                     </tr>
                   @endforeach

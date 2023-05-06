@@ -45,6 +45,10 @@ class CategoryController extends Controller
     }
     public function update(Request $request)
     {
+        if(Category::updateDuplicateCheck('name', $request->name, $request->id))
+        {
+            return redirect()->back()->with('error', Category::$duplicate_entry_message);
+        }
         $result = Category::updateCategory($request);
         if($request)
         {

@@ -20,6 +20,10 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+    public static function getCategory()
+    {
+        return self::query()->get();
+    }
 
     public static function prepareData($request, $storeORUpdate="store" )
     {
@@ -41,7 +45,7 @@ class Category extends Model
             $data['updated_by'] = Auth::user()->id;
             $data['updated_at'] = date('Y-m-d h:i:s', time());
         }
-        
+
         return $data;
     }
 
@@ -54,7 +58,7 @@ class Category extends Model
     public static function duplicateCheck($column_name, $value)   //pass column name and value and the function return's true of false always
     {
         return is_null(self::query()->where($column_name, $value)->first()) ? false : true;
-    } 
+    }
 
     public static function store($request)
     {
@@ -80,5 +84,9 @@ class Category extends Model
     public static function deleteCategory($id)
     {
         return self::query()->where('id', $id)->delete();
+    }
+    public static function updateDuplicateCheck($column_name, $value, $id)
+    {
+        return is_null(self::query()->where('id', '!=', $id)->where($column_name, $value)->first()) ? false : true;
     }
 }

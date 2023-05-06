@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Brand;
 use Illuminate\Support\Facades\Log;
-use App\Models\Category;
-
 
 class BrandController extends Controller
 {
@@ -27,15 +26,16 @@ class BrandController extends Controller
         if(Brand::duplicateCheck('name', $request->name))
         {
             return redirect()->back()->with('error', Brand::$duplicate_entry_message);
-        }  
+        }
         $result = Brand::store($request);
         if($result == Brand::$success)
         {
-            $message = "Brand data insert successfully by ".Auth::user()->name.'('.Auth::user()->id.'), table name = brands, at '.date('Y-m-d H:i:s', time());
+            $message = "Brand data insert successfully by ".Auth::user()->name.'('.Auth::user()->id.'), table name = categories, at '.date('Y-m-d H:i:s', time());
             Log::info($message);
             return redirect()->back()->with('success', Brand::$success_message);
         }
     }
+
     public function edit($id)
     {
         $data = array(
@@ -47,6 +47,11 @@ class BrandController extends Controller
     }
     public function update(Request $request)
     {
+        if(Brand::updateDuplicateCheck('name', $request->name, $request->id))
+        {
+            return redirect()->back()->with('error', Brand::$duplicate_entry_message);
+        }
+
         $result = Brand::updateBrand($request);
         if($request)
         {
