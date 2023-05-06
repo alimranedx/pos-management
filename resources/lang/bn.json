@@ -8,6 +8,10 @@
     "Admin": "অ্যাডমিন",
     "Logout": "প্রস্থান",
     "Dashboard": "ড্যাশবোর্ড",
-    "You are logged in!": "আপনি সংযুক্ত আছেন!"
+    "You are logged in!": "আপনি সংযুক্ত আছেন!",
+    "Wellcome to POS Management System": "পস ম্যানেজমেন্ট সিস্টেমে স্বাগতম",
+    "Login": "প্রবেশ",
+    "Register": "নিবন্ধন",
+    "Category": "ক্যাটেগরি"
 
 }
