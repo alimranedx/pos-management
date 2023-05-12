@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\DesignPaternController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
     Route::post('/brand/update', [BrandController::class, 'update'])->name('brand.update');
 });
+
+Route::get('/design-patern', [DesignPaternController::class, 'index'])->name('/design_patern');
 
 
 // Route::get('/get-table', [BrandController::class, 'getTable']);
